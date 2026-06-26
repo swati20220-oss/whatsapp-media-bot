@@ -2,11 +2,11 @@ from whatsapp_api_client_python import API
 import time
 
 # ⚠️ Yahan apni Green-API ki details dalein
-ID_INSTANCE = "YAHAN_APNI_ID_INSTANCE_DALEIN"
-API_TOKEN_INSTANCE = "YAHAN_APNA_API_TOKEN_INSTANCE_DALEIN"
+ID_INSTANCE = "7107664970"
+API_TOKEN_INSTANCE = "6aa8b6ada5bd43f2a97abc63a2272c0f65434541b49e4afca4"
 
 # ⚠️ Yahan apne target WhatsApp Group ki ID dalein (Example: '120363xxxxxx@g.us')
-TARGET_GROUP_ID = "YAHAN_GROUP_ID_DALEIN@g.us"
+TARGET_GROUP_ID = "120363427921537759@g.us"
 
 greenAPI = API.GreenApi(ID_INSTANCE, API_TOKEN_INSTANCE)
 
