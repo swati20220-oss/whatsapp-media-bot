@@ -1,15 +1,32 @@
+import threading
+from flask import Flask
 from whatsapp_api_client_python import API
 import time
 
-# ⚠️ Yahan apni Green-API ki details dalein
+# ---- REPLIT KO 24 GHANTE ZINDA RAKHNE KA CODE ----
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "WhatsApp Bot is alive and running!"
+
+def run_web_server():
+    app.run(host='0.0.0.0', port=8080)
+
+# Web server ko alag thread me chalu karenge taaki bot bhi chalta rahe
+t = threading.Thread(target=run_web_server)
+t.start()
+# --------------------------------------------------
+
+# ⚠️ Green-API ki details pehle se sahi hain
 ID_INSTANCE = "7107664970"
 API_TOKEN_INSTANCE = "6aa8b6ada5bd43f2a97abc63a2272c0f65434541b49e4afca4"
 
-# ⚠️ SOURCE_GROUP_ID = Jahan se photo/video UTHANI hai (Example: '120363xxxx@g.us')
-SOURCE_GROUP_ID = "120363427921537759@g.us"
+# ⚠️ BADLO YAHAN: Apne asali WhatsApp Group ki ID dalo jahan se photo uthani hai
+SOURCE_GROUP_ID = "120363427921537759@g.us" 
 
-# ⚠️ TARGET_GROUP_ID = Jahan photo/video BHEJNI hai (Example: '120363xxxx@g.us')
-TARGET_GROUP_ID = "120363405481516191@g.us"
+# ⚠️ BADLO YAHAN: Apne asali WhatsApp Group ki ID dalo jahan photo bhejni hai
+TARGET_GROUP_ID = "120363405481516191@g.us" 
 
 greenAPI = API.GreenApi(ID_INSTANCE, API_TOKEN_INSTANCE)
 
@@ -27,6 +44,10 @@ while True:
             
             # Pata karo message kis group se aaya hai
             sender_chat_id = notification.get("senderData", {}).get("chatId")
+            
+            # Agar koi naya message aaye toh console me uski Group ID print hogi (ID nikalne ke liye)
+            if sender_chat_id:
+                print(f"Message aaya hai is ID se: {sender_chat_id}")
             
             # SIRF tabhi chalega jab message hamare SOURCE group se aayega aur naya hoga
             if sender_chat_id == SOURCE_GROUP_ID and id_webhook not in seen_messages:
